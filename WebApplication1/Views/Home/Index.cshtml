@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html>
+    <head>
+        <link href="~/StyleSheet1.css" rel="stylesheet" type="text/css"/>
+        <title>Магазин</title>
+    </head>
+    <body>
+        <div class="main">
+            <div class="header">
+                <div><h1>Магазин</h1></div>
+                <img src="Pictures/Basket.png" />
+            </div>
+            <menu class="menu">
+                <li><a href="#">жми сюда</a></li>
+                <li><a href="#">или сюда</a>
+                    <div>
+                        <a href="#">qwerty</a>
+                        <a href="#">йцукен</a>
+                    </div>
+                </li>
+            </menu>
+            
+            <div class="content">
+                @{for(int i = 0;i < ViewBag.product.Count;i++){
+                    Path="Pictures/" + @ViewBag.product[i].name + ".jpg";
+                    <div class="product"> 
+                        <img src="@Path"/> 
+                        <p><a>60% BAMBOO CASE</a></p>
+                                <p><a>Цена: @ViewBag.product[i].price</a></p>
+                        <p><a href="product.html">Купить</a></p>
+                    </div> 
+                }}
+                
+
+            </div>
+        </div>
+    </body>
+</html>
