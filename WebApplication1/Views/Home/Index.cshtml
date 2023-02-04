@@ -22,15 +22,17 @@
             </menu>
             
             <div class="content">
-                @{for(int i = 0;i < ViewBag.product.Count;i++){
-                    Path="Pictures/" + @ViewBag.product[i].name + ".jpg";
-                    <div class="product"> 
-                        <img src="@Path"/> 
-                        <p><a>60% BAMBOO CASE</a></p>
-                                <p><a>Цена: @ViewBag.product[i].price</a></p>
-                        <p><a href="product.html">Купить</a></p>
-                    </div> 
-                }}
+            @{
+                for(int i = 0; i < ViewBag.product.Count;i++){
+                    string path="Pictures/" + @ViewBag.product[i].name + ".jpg";
+                        <div class="product"> 
+                            <img src="@path"/> 
+                                    <p><a>@ViewBag.product[i].name</a></p>
+                                    <p><a>Цена: @ViewBag.product[i].price</a></p>
+                                    <p><a href="Home/product?id=@i">Купить</a></p>
+                        </div> 
+                }
+            }
                 
 
             </div>

@@ -7,6 +7,7 @@ namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
+        List<product> list = new List<product>();
         private readonly ILogger<HomeController> _logger;
         
         public HomeController(ILogger<HomeController> logger)
@@ -16,20 +17,37 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
+            product[] products = new product[3];
+            products[0].id = 1;
+            products[0].name = "60% BAMBOO CASE";
+            products[0].price = 100;
+            products[0].description = "ALKSJDKLjmcJKL1234567890-=ASDJXJCKAjsdklJKLSADJKLASCLJCMXZNC<MZXNCLKJKKLSADJKLASJKLDSJKLDSJKLDSJKL";
+            list.Add(products[0]);
 
-            List<product> list = new List<product>();
-            product products = new product();
-            products.id = 1;
-            products.name = "1";
-            products.price = 100;
-            list.Add(products);
-            products.id = 2;
-            products.name = "2";
-            products.price = 200;
+            products[1].id = 2;
+            products[1].name = "60% BRASS ANSI PLATE";
+            products[1].price = 200;
+            list.Add(products[1]);
 
-            list.Add(products);
 
             ViewBag.product = list;
+            return View();
+        }
+        public IActionResult product(int id)
+        {
+            product[] products = new product[3];
+            products[0].id = 1;
+            products[0].name = "60% BAMBOO CASE";
+            products[0].price = 100;
+            products[0].description = "ALKSJDKLjmcJKL1234567890-=ASDJXJCKAjsdklJKLSADJKLASCLJCMXZNC<MZXNCLKJKKLSADJKLASJKLDSJKLDSJKLDSJKL";
+            list.Add(products[0]);
+
+            products[1].id = 2;
+            products[1].name = "60% BRASS ANSI PLATE";
+            products[1].price = 200;
+            list.Add(products[1]);
+
+            ViewBag.choosenproduct = list[id];
             return View();
         }
      

@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html>
+    <head>
+        <link href="~/StyleSheet1.css" rel="stylesheet" type="text/css"/>
+        <title>@ViewBag.choosenproduct.name</title>
+    </head>
+    <body>
+        <div class="main">
+            <div class=" header"><h1>Магазин</h1></div>
+            <menu class="menu">
+                <li><a href="#">жми сюда</a></li>
+                <li>
+                    <a href="#">или сюда</a>
+                    <div>
+                        <a href="#">qwerty</a>
+                        <a href="#">йцукен</a>
+                    </div>
+                </li>
+            </menu>
+            <div class="content">
+                <div class="tovar">
+                    @{string path = "Pictures/" + ViewBag.choosenproduct.name + ".jpg";}
+                    <div>
+                        <img src="~/@path" />
+                    </div>
+                    <div>
+                        <h3>@ViewBag.choosenproduct.name</h3>
+                        <p><a>@ViewBag.choosenproduct.price</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
