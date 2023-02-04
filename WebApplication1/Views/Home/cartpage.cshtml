@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/StyleSheet1.css" rel="stylesheet" type="text/css" />
+    <title>Корзина</title>
+</head>
+<body>
+    <div class="main">
+        <div class=" header">
+            <div><h1>Корзина</h1></div>
+        </div>
+        <menu class="menu">
+            <li><a href="#">жми сюда</a></li>
+            <li>
+                <a href="#">или сюда</a>
+                <div>
+                    <a href="#">qwerty</a>
+                    <a href="#">йцукен</a>
+                </div>
+            </li>
+        </menu>
+        <div class="content">
+            @{  for(int i = 0;i < ViewBag.cartlist.Count;i++){
+                    <div class="cartcontent">
+                        <div class="cart">
+                            <input type="checkbox" />
+                            <img src="Pictures/60% BAMBOO CASE.jpg" />
+                            <a>
+                                <h2>Название</h2>
+                                <p>цена</p>
+                            </a>
+                        </div>
+                    </div>
+                }   
+            }
+                <div class="purchase">
+                    <h3>Итог:</h3>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>

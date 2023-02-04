@@ -50,6 +50,12 @@ namespace WebApplication1.Controllers
             ViewBag.choosenproduct = list[id];
             return View();
         }
+
+        public IActionResult cartpage(int id)
+        {
+            ViewBag.cartproduct = list[id];
+            return View();
+        }
      
         /*
         public IActionResult Privacy()
