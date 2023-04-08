@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+// получаем строку подключения из файла конфигурации
+string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// добавляем контекст ApplicationContext в качестве сервиса в приложение
+builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
 
 // Add services to the container.
-    builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 /*
@@ -23,10 +30,13 @@ app.UseAuthorization();
 app.UseRouting();
 app.UseStaticFiles();
 app.UseHttpsRedirection();
+
+// получение данных
+//app.MapGet("/", (ApplicationContext db) => db.objects.ToList());
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
 
 //app.Run(async (context) => await context.Response.WriteAsync("<h1>asdasdasdA</h1> "));
 /*app.Run(async (context) =>

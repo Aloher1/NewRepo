@@ -17,35 +17,11 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
-            product[] products = new product[3];
-            products[0].id = 1;
-            products[0].name = "60% BAMBOO CASE";
-            products[0].price = 100;
-            products[0].description = "ALKSJDKLjmcJKL1234567890-=ASDJXJCKAjsdklJKLSADJKLASCLJCMXZNC<MZXNCLKJKKLSADJKLASJKLDSJKLDSJKLDSJKL";
-            list.Add(products[0]);
-
-            products[1].id = 2;
-            products[1].name = "60% BRASS ANSI PLATE";
-            products[1].price = 200;
-            list.Add(products[1]);
-
-
             ViewBag.product = list;
             return View();
         }
         public IActionResult product(int id)
         {
-            product[] products = new product[3];
-            products[0].id = 1;
-            products[0].name = "60% BAMBOO CASE";
-            products[0].price = 100;
-            products[0].description = "ALKSJDKLjmcJKL1234567890-=ASDJXJCKAjsdklJKLSADJKLASCLJCMXZNC<MZXNCLKJKKLSADJKLASJKLDSJKLDSJKLDSJKL";
-            list.Add(products[0]);
-
-            products[1].id = 2;
-            products[1].name = "60% BRASS ANSI PLATE";
-            products[1].price = 200;
-            list.Add(products[1]);
 
             ViewBag.choosenproduct = list[id];
             return View();
