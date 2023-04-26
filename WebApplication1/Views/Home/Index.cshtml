@@ -23,13 +23,13 @@
             
             <div class="content">
             @{
-                for(int i = 0; i < ViewBag.product.Count;i++){
+                for(int i = 0; i < 3;i++){
                     string path="Pictures/" + @ViewBag.product[i].name + ".jpg";
-                        <div class="product"> 
-                            <img src="@path"/> 
-                                    <p><a>@ViewBag.product[i].name</a></p>
-                                    <p><a>Цена: @ViewBag.product[i].price</a></p>
-                                    <p><a href="Home/product?id=@i">Купить</a></p>
+                    <div class="product"> 
+                        <img src="@path"/> 
+                            <p><a>@ViewBag.product[i].name</a></p>
+                            <p><a>Цена: @ViewBag.product[i].price</a></p>
+                            <p><a href="Home/product?id=@i">Купить</a></p>
                         </div> 
                 }
             }

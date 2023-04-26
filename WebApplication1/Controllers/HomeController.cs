@@ -2,34 +2,44 @@
 using System.Diagnostics;
 using WebApplication1.Models;
 using System.Security.Permissions;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-        List<product> list = new List<product>();
-        private readonly ILogger<HomeController> _logger;
+        ApplicationContext db;
         
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationContext context)
         {
-            _logger = logger;
+            db = context;
         }
 
         public IActionResult Index()
         {
-            ViewBag.product = list;
+            ViewBag.product = db.objects.ToList();
             return View();
         }
         public IActionResult product(int id)
         {
 
-            ViewBag.choosenproduct = list[id];
+            ViewBag.choosenproduct = db.objects.ToList()[id];
             return View();
         }
-
+                
         public IActionResult cartpage(int id)
         {
-            ViewBag.cartproduct = list[id];
+            ViewBag.cartlist = db.cart.ToList();
+            if (id != 0)
+            {
+                cartproduct p = db.cart.Where(s => s.id == id).FirstOrDefault();
+                if (id == p.id)
+                {
+                    ViewBag.cartlist[id].amount++;
+                    db.Entry(p).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+            }
             return View();
         }
      
