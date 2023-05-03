@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<head>
+    <style>
+        body {
+            background: #82b1cc;
+            text-align: center;
+        }
+
+        .main {
+            margin: 0 auto 0 auto;
+            padding: 3px;
+            background: #d1d1d1;
+            text-align: center;
+            border: 2px solid black;
+        }
+        table{
+            margin: 0 auto 0 auto;
+            background: #d1d1d1;
+            text-align: center;
+            border: 2px solid black;
+            border-spacing: 5px;
+        }
+        td, th{
+            padding: 5px;
+            background: #d1d1d1;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <form method="get">
+        <table>
+            <tr>
+                <th></th>
+                <th>id</th>
+                <th>Имя</th>
+                <th>Категория</th>
+                <th>Цена</th>
+                <th>Описание</th>
+            </tr>
+            @{
+                for (int i = 0; i < ViewBag.obj.Count; i++)
+                {
+                    <tr>
+                        <td><input type="checkbox" name="" value="@ViewBag.obj[i].id"></td>
+                        <td>@ViewBag.obj[i].id</td>
+                        <td>@ViewBag.obj[i].name</td>
+                        <td>@ViewBag.obj[i].category</td>
+                        <td>@ViewBag.obj[i].price</td>
+                        <td>@ViewBag.obj[i].description</td>
+                    </tr>
+                }
+            }
+        </table>
+        <input type="submit" value="Удалить" size="10" name="button">  
+    </form>
+</body>

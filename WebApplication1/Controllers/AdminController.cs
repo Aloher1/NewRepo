@@ -45,6 +45,11 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
+        public IActionResult Delete()
+        {
+            ViewBag.obj = db.objects.ToList();
+            return View();
+        }
         [HttpGet]
         public IActionResult Add(string name, int price, string category, string file)
         {
