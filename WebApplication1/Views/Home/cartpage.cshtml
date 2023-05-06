@@ -23,18 +23,18 @@
         <div class="content">
             @{  
                 for(int i = 0;i < ViewBag.cartlist.Count;i++){
-                string path = "Pictures/" + ViewBag.cartlist[i].name + ".jpg";
-                <div class="cartcontent">
-                    <div class="cart">
-                        <input type="checkbox" />
-                        <img src=~/@path />
-                        <a>
-                            <h2>@ViewBag.cartlist[i].name</h2>
-                            <p>@ViewBag.cartlist[i].price</p>
-                            <p>n:@ViewBag.cartlist[i].amount</p>
-                        </a>
+                    string path = "Pictures/" + ViewBag.cartlist[i].name + ".jpg";
+                    <div class="cartcontent">
+                        <div class="cart">
+                            <input type="checkbox" />
+                            <img src=~/@path />
+                            <a>
+                                <h2>@ViewBag.cartlist[i].name</h2>
+                                <p>@ViewBag.cartlist[i].price</p>
+                                <p>n:@ViewBag.cartlist[i].amount</p>
+                            </a>
+                        </div>
                     </div>
-                </div>
                 }   
             }
                 <div class="purchase">

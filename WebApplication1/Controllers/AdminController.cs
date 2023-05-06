@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -14,23 +15,6 @@ namespace WebApplication1.Controllers
         public IActionResult Index()
         {
             return View();
-        }
-        [HttpPost]
-       // public string Index(string login, string password )=>$"Логин: {login} Пароль:{password}";
-
-        public IActionResult Index(string login, string password)
-        {
-            User u = db.Users.Where(s => s.login == login).FirstOrDefault();
-            if (u != null)
-                if (u.password == password)
-                {
-                    if (u.login == "admin")
-                        return View("AdminPage");
-                    else
-                        return View("cabinet");
-                }
-            return View();
-            
         }
 
         public IActionResult AdminPage()
@@ -50,8 +34,24 @@ namespace WebApplication1.Controllers
             ViewBag.obj = db.objects.ToList();
             return View();
         }
+        [HttpPost]
+        // public string Index(string login, string password )=>$"Логин: {login} Пароль:{password}";
+        public IActionResult Index(string login, string password)
+        {
+            User u = db.Users.Where(s => s.login == login).FirstOrDefault();
+            if (u != null)
+                if (u.password == password)
+                {
+                    if (u.login == "admin")
+                        return View("AdminPage");
+                    else
+                        return View("cabinet");
+                }
+            return View();
+
+        }
         [HttpGet]
-        public IActionResult Add(string name, int price, string category, string file)
+        public IActionResult Add(string name, int price, string category, string description)
         {
             if (name != null && price != null && category != null)
             {
@@ -59,11 +59,34 @@ namespace WebApplication1.Controllers
                 u.name = name;
                 u.price = price;
                 u.category = category;
+                u.description = description;
                 db.objects.Add(u);
                 if(db.SaveChanges() > 0)
                     ViewBag.save = true;
                 else
                     ViewBag.save = false;
+            }
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Delete(List<int> checkboxlist)
+        {
+            if (checkboxlist.Count == 0)
+            {
+                ViewBag.obj = db.objects.ToList();
+            }    
+            else
+            {
+                foreach(int id in checkboxlist)
+                {
+                    db.objects.Remove(db.objects.Find(id));
+                }
+                if(db.SaveChanges() > 0)
+                    ViewBag.save = true;
+                else
+                    ViewBag.save = false;
+                checkboxlist = null;
+                ViewBag.obj = db.objects.ToList();
             }
             return View();
         }

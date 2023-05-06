@@ -83,7 +83,7 @@
     background:#8fa09b;
     width:100%;
     height:30%;
-    display:flex;
+    display:block;
     justify-content:space-around; 
 }
 .cart img{
