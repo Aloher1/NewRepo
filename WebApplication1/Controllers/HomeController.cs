@@ -42,7 +42,13 @@ namespace WebApplication1.Controllers
             }
             return View();
         }
-     
+        [HttpPost]
+        public IActionResult cartpage(List<int> checkboxlist)
+        {
+            if (checkboxlist.Count > 0)
+                return View("purchase");
+            return View();
+        }
         
         public IActionResult Privacy()
         {

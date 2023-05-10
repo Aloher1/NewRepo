@@ -74,27 +74,39 @@
 
 .cartcontent {
     background: #f0f0f0;
-    height: 1000px;
-    display: block;
-    width:50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 .cart {
-    margin:25px 25px;
-    background:#8fa09b;
-    width:100%;
-    height:30%;
+    margin: 25px;
+    background: #8fa09b;
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+.cartproducts{
     display:block;
-    justify-content:space-around; 
 }
 .cart img{
     width:30%;
-    margin:25px 0 25px;
+    margin:25px;
+}
+.cart h2{
+    margin: 5px;
+}
+.cart input{
+    margin: 5px;
 }
 .purchase {
-    width: 30%;
     background: #8fa09b;
     height:300px;
+    width:50%;
     margin:25px 25px 0 auto;
+}
+.purchase h3{
+    margin: 25px;
 }
 .product {
     margin-top: 25px;

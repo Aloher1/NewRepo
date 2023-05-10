@@ -20,27 +20,31 @@
                 </div>
             </li>
         </menu>
-        <div class="content">
-            @{  
-                for(int i = 0;i < ViewBag.cartlist.Count;i++){
-                    string path = "Pictures/" + ViewBag.cartlist[i].name + ".jpg";
-                    <div class="cartcontent">
+        <form method="post">
+            <div class="cartcontent">
+                <div class="cartproducts">
+                @{  
+                    for(int i = 0;i < ViewBag.cartlist.Count;i++){
+                        string path = "Pictures/" + ViewBag.cartlist[i].name + ".jpg";
                         <div class="cart">
-                            <input type="checkbox" />
+                            <input type="checkbox" name="checkboxlist" value="@ViewBag.cartlist[i].id" />
                             <img src=~/@path />
-                            <a>
+                            <div>
                                 <h2>@ViewBag.cartlist[i].name</h2>
-                                <p>@ViewBag.cartlist[i].price</p>
-                                <p>n:@ViewBag.cartlist[i].amount</p>
-                            </a>
+                                <p>@ViewBag.cartlist[i].price р.</p>
+                                <p>Количество: @ViewBag.cartlist[i].amount</p>
+                            </div>
                         </div>
-                    </div>
-                }   
-            }
+                    }   
+                }
+                </div>
                 <div class="purchase">
                     <h3>Итог:</h3>
+                    <p><input type="submit" name="button" value="Купить" /></p>
                 </div>
-            </div>
-        </div>
-    </body>
-    </html>
+            </form>
+
+        </div>   
+    </div>
+</body>
+</html>
