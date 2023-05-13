@@ -22,7 +22,6 @@ namespace WebApplication1.Controllers
         }
         public IActionResult product(int id)
         {
-
             ViewBag.choosenproduct = db.objects.ToList()[id];
             return View();
         }
@@ -45,8 +44,24 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult cartpage(List<int> checkboxlist)
         {
+            ViewBag.cartlist = db.cart.ToList();
             if (checkboxlist.Count > 0)
+            {
+                foreach(int id in checkboxlist)
+                {
+                    List<product> orderlist = new List<product>();
+                    orderlist.Add(db.objects.Find(id));
+                    ViewBag.orderlist = orderlist;
+                }
                 return View("purchase");
+            }
+            else
+            {
+                return View();
+            }
+        }
+        public IActionResult purchase()
+        {
             return View();
         }
         

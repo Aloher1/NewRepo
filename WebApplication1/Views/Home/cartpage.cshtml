@@ -27,12 +27,12 @@
                     for(int i = 0;i < ViewBag.cartlist.Count;i++){
                         string path = "Pictures/" + ViewBag.cartlist[i].name + ".jpg";
                         <div class="cart">
-                            <input type="checkbox" name="checkboxlist" value="@ViewBag.cartlist[i].id" />
+                            <input type="checkbox" size=10 name="checkboxlist" value="@ViewBag.cartlist[i].id" />
                             <img src=~/@path />
                             <div>
                                 <h2>@ViewBag.cartlist[i].name</h2>
-                                <p>@ViewBag.cartlist[i].price р.</p>
-                                <p>Количество: @ViewBag.cartlist[i].amount</p>
+                                <p> @ViewBag.cartlist[i].price р.</p>
+                                <p> Количество: @ViewBag.cartlist[i].amount</p>
                             </div>
                         </div>
                     }   

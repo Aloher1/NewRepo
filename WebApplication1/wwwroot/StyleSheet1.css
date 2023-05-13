@@ -78,6 +78,7 @@
     flex-direction: row;
     justify-content: space-around;
 }
+
 .cart {
     margin: 25px;
     background: #8fa09b;
@@ -96,9 +97,7 @@
 .cart h2{
     margin: 5px;
 }
-.cart input{
-    margin: 5px;
-}
+
 .purchase {
     background: #8fa09b;
     height:300px;
@@ -108,11 +107,13 @@
 .purchase h3{
     margin: 25px;
 }
+.purchase input{
+    margin: 5px;
+}
 .product {
     margin-top: 25px;
     margin-bottom: 10px;
     width: 25%;
-    height: 450px;
     background: #8fa09b;
     text-align: center;
     color: white;

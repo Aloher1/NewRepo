@@ -10,5 +10,34 @@
         <div class=" header">
             <div><h1>Подтверждение покупки</h1></div>
         </div>
+        <div class="content">
+            <div>
+                @{
+                    for(int i = 0;i < ViewBag.orderlist.Count();i++){
+                        string path = "Pictures/" + ViewBag.orderlist[i].name + ".jpg";
+                        <div class="cart">
+                            <input type="checkbox" size=10 name="checkboxlist" value="@ViewBag.orderlist[i].id" />
+                            <img src=~/@path />
+                            <div>
+                                <h2>@ViewBag.orderlist[i].name</h2>
+                                <p> @ViewBag.orderlist[i].price р.</p>
+                                <p> Количество: @ViewBag.orderlist[i].amount</p>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+            <div>
+                Введите свою имя и фамилию
+                <input type="text" size="10" name="clientname"/>
+                <input type="text" size="10" name="clientsurname" />
+                Введите номер телефона
+                <input type="number" name="telephone" />
+                Введите аддрес доставки
+                <input type="text" name="address" />
+                <input type="submit" name="button" value="Купить" />
+            </div>
+        </div>
+    </div>
 </body>
 </html>
