@@ -12,6 +12,12 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 /*
+app.Use(async (context, next) =>
+{
+    context.Items["user"] = "user";
+    await next.Invoke();
+});
+/*
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

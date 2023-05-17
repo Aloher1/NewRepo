@@ -37,13 +37,18 @@ namespace WebApplication1.Controllers
         [HttpPost]
         // public string Index(string login, string password )=>$"Логин: {login} Пароль:{password}";
         public IActionResult Index(string login, string password)
+                        
         {
             User u = db.Users.Where(s => s.login == login).FirstOrDefault();
             if (u != null)
                 if (u.password == password)
                 {
                     if (u.login == "admin")
+                    {
+                        HttpContext.Items["user"] = "admin";
+                        ;
                         return View("AdminPage");
+                    }
                     else
                         return View("cabinet");
                 }
@@ -53,42 +58,56 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public IActionResult Add(string name, int price, string category, string description)
         {
-            if (name != null && price != null && category != null)
+            if (HttpContext.Items["user"] == "admin")
             {
-                product u = new product();
-                u.name = name;
-                u.price = price;
-                u.category = category;
-                u.description = description;
-                db.objects.Add(u);
-                if(db.SaveChanges() > 0)
-                    ViewBag.save = true;
-                else
-                    ViewBag.save = false;
+                if (name != null && price != null && category != null)
+                {
+                    product u = new product();
+                    u.name = name;
+                    u.price = price;
+                    u.category = category;
+                    u.description = description;
+                    db.objects.Add(u);
+                    if (db.SaveChanges() > 0)
+                        ViewBag.save = true;
+                    else
+                        ViewBag.save = false;
+                }
+                return View();
             }
-            return View();
+            else
+            {
+                return Redirect("~/Home/Index");
+            }
         }
         [HttpGet]
         public IActionResult Delete(List<int> checkboxlist)
         {
-            if (checkboxlist.Count == 0)
+            if (HttpContext.Items["user"] == "admin")
             {
-                ViewBag.obj = db.objects.ToList();
-            }    
+                if (checkboxlist.Count == 0)
+                {
+                    ViewBag.obj = db.objects.ToList();
+                }
+                else
+                {
+                    foreach (int id in checkboxlist)
+                    {
+                        db.objects.Remove(db.objects.Find(id));
+                    }
+                    if (db.SaveChanges() > 0)
+                        ViewBag.save = true;
+                    else
+                        ViewBag.save = false;
+                    checkboxlist = null;
+                    ViewBag.obj = db.objects.ToList();
+                }
+                return View();
+            }
             else
             {
-                foreach(int id in checkboxlist)
-                {
-                    db.objects.Remove(db.objects.Find(id));
-                }
-                if(db.SaveChanges() > 0)
-                    ViewBag.save = true;
-                else
-                    ViewBag.save = false;
-                checkboxlist = null;
-                ViewBag.obj = db.objects.ToList();
+                return Redirect("~/Home/Index");
             }
-            return View();
         }
     }
 }

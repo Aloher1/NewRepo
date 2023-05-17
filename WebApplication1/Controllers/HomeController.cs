@@ -17,6 +17,7 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
+            HttpContext.Items["user"] = "user";
             ViewBag.product = db.objects.ToList();
             return View();
         }
