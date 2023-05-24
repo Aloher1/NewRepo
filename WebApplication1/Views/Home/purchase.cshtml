@@ -13,7 +13,7 @@
         <div class="content">
             <div>
                 @{
-                    for(int i = 0;i < ViewBag.orderlist.Count();i++){
+                    for(int i = 0;i < ViewBag.orderlist.Count;i++){
                         string path = "Pictures/" + ViewBag.orderlist[i].name + ".jpg";
                         <div class="cart">
                             <input type="checkbox" size=10 name="checkboxlist" value="@ViewBag.orderlist[i].id" />
@@ -27,16 +27,19 @@
                     }
                 }
             </div>
-            <div>
-                Введите свою имя и фамилию
-                <input type="text" size="10" name="clientname"/>
-                <input type="text" size="10" name="clientsurname" />
-                Введите номер телефона
-                <input type="number" name="telephone" />
-                Введите аддрес доставки
-                <input type="text" name="address" />
-                <input type="submit" name="button" value="Купить" />
-            </div>
+            <form method="get">
+                <div>
+                    <br>Введите своё имя
+                    <br><input type="text" size="20" name="clientname"/>
+                    <br>Введите свою фамилию
+                    <br /><input type="text" size="20" name="clientsurname" />
+                    <br>Введите номер телефона
+                    <br><input type="" name="telephone" />
+                    <br>Введите адрес доставки
+                    <br><input type="text" name="address" />
+                    <p><input type="submit" name="button" value="Купить" /></p>
+                </div>
+            </form>
         </div>
     </div>
 </body>

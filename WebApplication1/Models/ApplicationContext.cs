@@ -6,6 +6,7 @@ public class ApplicationContext : DbContext
     public DbSet<product> objects { get; set; } = null!;
     public DbSet<cartproduct> cart { get; set; } = null!;
     public DbSet<User> Users { get; set; } = null!;
+    public DbSet<order> Orders { get; set; } = null!;
     public ApplicationContext(DbContextOptions<ApplicationContext> options) 
         : base(options)
     {

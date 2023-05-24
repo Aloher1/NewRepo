@@ -3,13 +3,15 @@ using System.Diagnostics;
 using WebApplication1.Models;
 using System.Security.Permissions;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
         ApplicationContext db;
-        
+        List<cartproduct> orderlist = new List<cartproduct>();
+
         public HomeController(ApplicationContext context)
         {
             db = context;
@@ -50,8 +52,7 @@ namespace WebApplication1.Controllers
             {
                 foreach(int id in checkboxlist)
                 {
-                    List<product> orderlist = new List<product>();
-                    orderlist.Add(db.objects.Find(id));
+                    orderlist.Add(db.cart.Find(id));
                     ViewBag.orderlist = orderlist;
                 }
                 return View("purchase");
@@ -65,7 +66,30 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
-        
+        [HttpGet]
+        public IActionResult purchase(string name, string surname, int price, string address, int telephone, DateTime date)
+        {
+            for (int i = 0; i < orderlist.Count; i++)
+            {
+                if (name != null && surname != null && address != null && telephone != null)
+                {
+                    order u = new order();
+                    u.productid = orderlist[i].id;
+                    u.productname = orderlist[i].name;
+                    u.name = name;
+                    u.surname = surname;
+                    u.price = orderlist[i].price;//
+                    u.address = address;
+                    u.telephone = telephone;
+                    u.date = date;
+                    db.Orders.Add(u);
+                }
+            }
+            if (db.SaveChanges() > 0)
+                return View();
+            else
+                return View();
+        }
         public IActionResult Privacy()
         {
             return View();
