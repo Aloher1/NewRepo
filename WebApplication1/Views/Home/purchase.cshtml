@@ -13,15 +13,15 @@
         <div class="content">
             <div>
                 @{
-                    for(int i = 0;i < ViewBag.orderlist.Count;i++){
-                        string path = "Pictures/" + ViewBag.orderlist[i].name + ".jpg";
+                    for(int i = 0;i < ViewBag.cartlist.Count;i++){
+                        string path = "Pictures/" + ViewBag.cartlist[i].name + ".jpg";
                         <div class="cart">
-                            <input type="checkbox" size=10 name="checkboxlist" value="@ViewBag.orderlist[i].id" />
+                            <input type="checkbox" size=10 name="checkboxlist" value="@ViewBag.cartlist[i].id" />
                             <img src=~/@path />
                             <div>
-                                <h2>@ViewBag.orderlist[i].name</h2>
-                                <p> @ViewBag.orderlist[i].price р.</p>
-                                <p> Количество: @ViewBag.orderlist[i].amount</p>
+                                <h2>@ViewBag.cartlist[i].name</h2>
+                                <p> @ViewBag.cartlist[i].price р.</p>
+                                <p> Количество: @ViewBag.cartlist[i].amount</p>
                             </div>
                         </div>
                     }
@@ -32,12 +32,12 @@
                     <br>Введите своё имя
                     <br><input type="text" size="20" name="clientname"/>
                     <br>Введите свою фамилию
-                    <br /><input type="text" size="20" name="clientsurname" />
+                    <br><input type="text" size="20" name="clientsurname" />
                     <br>Введите номер телефона
                     <br><input type="" name="telephone" />
                     <br>Введите адрес доставки
                     <br><input type="text" name="address" />
-                    <p><input type="submit" name="button" value="Купить" /></p>
+                    <br><p><input type="submit" name="button" value="Купить" /></p>
                 </div>
             </form>
         </div>

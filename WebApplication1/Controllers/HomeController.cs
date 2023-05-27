@@ -10,7 +10,7 @@ namespace WebApplication1.Controllers
     public class HomeController : Controller
     {
         ApplicationContext db;
-        List<cartproduct> orderlist = new List<cartproduct>();
+         List<cartproduct> orderlist = new List<cartproduct>();
 
         public HomeController(ApplicationContext context)
         {
@@ -47,28 +47,41 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult cartpage(List<int> checkboxlist)
         {
-            ViewBag.cartlist = db.cart.ToList();
+            List<cartproduct> list = new List<cartproduct>();
+            list = db.cart.ToList();
+            ViewBag.cartlist = list;
+            
             if (checkboxlist.Count > 0)
             {
-                foreach(int id in checkboxlist)
+                for(int i = 1;i <= list.Count; i++)
                 {
-                    orderlist.Add(db.cart.Find(id));
-                    ViewBag.orderlist = orderlist;
+                    bool del = true;
+                    foreach(int id in checkboxlist)
+                    {
+                        if( i== id)
+                        {
+                            del = false;
+                        }
+                    }
+                    if (del == true)
+                    {
+                        db.cart.Remove(db.cart.Find(i));
+                        //db.Entry(db.cart.Find(i)).State = EntityState.Modified;
+                    }
+
                 }
-                return View("purchase");
+                return Redirect("purchase");
             }
             else
             {
                 return View();
             }
         }
-        public IActionResult purchase()
-        {
-            return View();
-        }
+        
         [HttpGet]
         public IActionResult purchase(string name, string surname, int price, string address, int telephone, DateTime date)
         {
+            ViewBag.cartlist = db.cart.ToList();
             for (int i = 0; i < orderlist.Count; i++)
             {
                 if (name != null && surname != null && address != null && telephone != null)
@@ -81,7 +94,7 @@ namespace WebApplication1.Controllers
                     u.price = orderlist[i].price;//
                     u.address = address;
                     u.telephone = telephone;
-                    u.date = date;
+                    //u.date = date;
                     db.Orders.Add(u);
                 }
             }
