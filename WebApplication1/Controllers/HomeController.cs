@@ -58,7 +58,7 @@ namespace WebApplication1.Controllers
                     bool del = true;
                     foreach(int id in checkboxlist)
                     {
-                        if( i== id)
+                        if(i == id)
                         {
                             del = false;
                         }
@@ -66,11 +66,11 @@ namespace WebApplication1.Controllers
                     if (del == true)
                     {
                         db.cart.Remove(db.cart.Find(i));
-                        //db.Entry(db.cart.Find(i)).State = EntityState.Modified;
+                        db.SaveChanges();//db.Entry(db.cart.Find(i)).State = EntityState.Modified;
                     }
 
                 }
-                return Redirect("purchase");
+                    return Redirect("purchase");
             }
             else
             {
@@ -79,27 +79,29 @@ namespace WebApplication1.Controllers
         }
         
         [HttpGet]
-        public IActionResult purchase(string name, string surname, int price, string address, int telephone, DateTime date)
+        public IActionResult purchase(string name, string surname, int price, string address, string telephone, DateTime date)
         {
             ViewBag.cartlist = db.cart.ToList();
-            for (int i = 0; i < orderlist.Count; i++)
+            if (name != null && surname != null && address != null && telephone != null)
             {
-                if (name != null && surname != null && address != null && telephone != null)
+                for (int i = 0; i < db.cart.ToList().Count; i++)
                 {
                     order u = new order();
-                    u.productid = orderlist[i].id;
-                    u.productname = orderlist[i].name;
+                    u.productid = db.cart.ToList()[i].id;
+                    u.productname = db.cart.ToList()[i].name;
                     u.name = name;
                     u.surname = surname;
-                    u.price = orderlist[i].price;//
+                    u.price = db.cart.ToList()[i].price;//
                     u.address = address;
                     u.telephone = telephone;
                     //u.date = date;
                     db.Orders.Add(u);
+                    db.SaveChanges();
+                    
                 }
+                return Redirect("Index");
             }
-            if (db.SaveChanges() > 0)
-                return View();
+
             else
                 return View();
         }

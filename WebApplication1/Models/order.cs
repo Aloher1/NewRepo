@@ -9,7 +9,7 @@
         public string name { get; set; }
         public string surname { get; set; }
         public string address { get; set; }
-        public int telephone { get; set; }
+        public string telephone { get; set; }
         public DateTime date { get; set; }
     }
 }
